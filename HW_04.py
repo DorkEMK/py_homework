@@ -18,24 +18,32 @@ def word_replace(stem, flex, new_stem, text):
     text = re.sub(pattern % (stem, flex), repl % (new_stem), text)
     return(text)
 
+# язык > шашлык
 infile = open('HW_04_лингвистика.txt', 'r')
 outfile = open('HW_04_шашлыковедение.txt', 'w')
 
-outfile.write(word_replace('язык', '(а|у|ом|е|и|ов|ам|ами|ах|)', 'шашлык', infile.read()))
+clean_text = infile.read().replace(chr(769), '') # delete stress
+outfile.write(word_replace('язык', '(а|у|ом|е|и|ов|ам|ами|ах|)', 'шашлык', clean_text))
 
 infile.close()
 outfile.close()
 
+# Финляндия > Малайзия
 infile = open('HW_04_Финляндия.txt', 'r')
 outfile = open('HW_04_Малайзия.txt', 'w')
-outfile.write(word_replace('финлянди', '(я|и|ю|ей)', 'малайзи', infile.read()))
+
+clean_text = infile.read().replace(chr(769), '')
+outfile.write(word_replace('финлянди', '(я|и|ю|ей)', 'малайзи', clean_text))
 
 infile.close()
 outfile.close()
 
+# философия > астрология
 infile = open('HW_04_философия.txt', 'r')
 outfile = open('HW_04_астрология.txt', 'w')
-outfile.write(word_replace('философи', '(я|и|ю|ей|й|ям|ями|ях)', 'астрологи', infile.read()))
+
+clean_text = infile.read().replace(chr(769), '')
+outfile.write(word_replace('философи', '(я|и|ю|ей|й|ям|ями|ях)', 'астрологи', clean_text))
 
 infile.close()
 outfile.close()
