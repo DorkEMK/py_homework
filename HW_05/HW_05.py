@@ -46,8 +46,23 @@ def first_l(dirlist):
             freq[d[0]] = freq[d[0]] + 1
     return(max(freq))
 
+# list of files
+def filenames(path):
+    files = [name for name in os.listdir(path) if os.path.isfile(os.path.join(path,name))]
+    dir_names = [os.path.join(path, name) for name in os.listdir(path)]
+    dir_names = [i for i in dir_names if os.path.isdir(i)]
+    for d in dir_names:
+        files.extend(filenames(d))
+    return(files)
+
+def dif_names(path):
+    names = filenames(path)
+    names = [i.rsplit('.', 1)[0] for i in names]
+    return len(set(names))
+
 with open('HW_05_res.txt', 'w+', encoding = 'utf-8') as f:
     print('Наибольшая глубина папки: ', depth(my_dir), file = f)
     # print((dirnames(my_dir))
     print('Папок с полностью кириллическими названиями: ', cyr_dir(dirnames(my_dir)), file = f)
     print('Большинство названий папок начинаются на букву: ',first_l(dirnames(my_dir)), file = f)
+    print('Уникальных названий файлов: ', dif_names(my_dir), file = f)
