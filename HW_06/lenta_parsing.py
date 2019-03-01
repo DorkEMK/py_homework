@@ -15,9 +15,12 @@ step = timedelta(days=1)
 source = 'lenta.ru' # а может не надо
 
 # файл с метаданными
-metatable = open('lenta_metadata.csv', 'a')
-heads = ['path', 'author','date','source','title','url','wordcount','\n']
-metatable.write('\t'.join([head for head in heads]))
+if os.path.exists('lenta_metadata.csv'):
+    metatable = open('lenta_metadata.csv', 'a')
+else:
+    metatable = open('lenta_metadata.csv', 'w')
+    heads = ['path', 'author','date','source','title','url','wordcount','\n']
+    metatable.write('\t'.join([head for head in heads]))
 
 current_date = date_start
 
@@ -72,7 +75,10 @@ while current_date  <= date_finish:
         # source = getsource.match(url)[1]
         
         # получаем заголовок
-        title = bs.h1.text.replace(u'\xa0', u' ')
+        if bs.h1:
+            title = bs.h1.text.replace(u'\xa0', u' ')
+        else:
+             title = ''
 
         # достаем и парсим текст
         text = BeautifulSoup(" ".join([p.text for p in bs.find_all("p") if p.attrs.get('itemprop') != 'author']), "html5lib").get_text().replace(u'\xa0', u' ')
