@@ -38,13 +38,16 @@ while current_date  <= date_finish:
     # для каждой статьи из списка:
     for article in articles:
 
-        metadata = []
+        print('Downloading ', article)
 
+        metadata = []
         # скачиваем статью
-        resp = requests.get(article)
+        try:
+            resp = requests.get(article)
+        except Exception as err:
+            print(str(err))
         bs = BeautifulSoup(resp.text, "html5lib")
 
-        # получаем url
         url = article
 
         # получаем название статьи
