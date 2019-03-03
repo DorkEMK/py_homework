@@ -3,3 +3,5 @@
 ```
 $ python3 lenta_parsing.py 2015-07-01 2016-07-01
 ```
+Тексты с 2015/07/01 по 2018/03/31 и таблица метаданных: https://drive.google.com/open?id=1h-Bf1wdM_XAQx_ZruPovuop1_qOoVdrn
+(скачать более поздние данные не успевала к 23.59, можно докачать)
